@@ -1,0 +1,6 @@
+@TechnoSkillingAPI_HostAddress = http://localhost:5134
+
+GET {{TechnoSkillingAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
