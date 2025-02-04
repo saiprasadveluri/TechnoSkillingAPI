@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TechnoSkillingAPI.Data;
 
@@ -11,9 +12,11 @@ using TechnoSkillingAPI.Data;
 namespace TechnoSkillingAPI.Migrations
 {
     [DbContext(typeof(TechnoSkillingDbContext))]
-    partial class TechnoSkillingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250204082540_BlogCatg_Post_TblCreate")]
+    partial class BlogCatg_Post_TblCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,9 +188,9 @@ namespace TechnoSkillingAPI.Migrations
                         .IsRequired();
 
                     b.HasOne("TechnoSkillingAPI.Data.UserInfo", "PostedUser")
-                        .WithMany("UserPosts")
+                        .WithMany()
                         .HasForeignKey("PostedUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ParentCategory");
@@ -213,11 +216,6 @@ namespace TechnoSkillingAPI.Migrations
             modelBuilder.Entity("TechnoSkillingAPI.Data.RoleMaster", b =>
                 {
                     b.Navigation("UsersInRole");
-                });
-
-            modelBuilder.Entity("TechnoSkillingAPI.Data.UserInfo", b =>
-                {
-                    b.Navigation("UserPosts");
                 });
 #pragma warning restore 612, 618
         }

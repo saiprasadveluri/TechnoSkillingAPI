@@ -20,5 +20,6 @@ namespace TechnoSkillingAPI.Data
         public Guid RoleId { get; set; }
         //Navigation Props
         public RoleMaster? ParentRole { get; set; }
+        public IList<BlogPost> UserPosts { get; set; }
     }
 }

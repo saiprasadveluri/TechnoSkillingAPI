@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TechnoSkillingAPI.Data;
 
@@ -11,9 +12,11 @@ using TechnoSkillingAPI.Data;
 namespace TechnoSkillingAPI.Migrations
 {
     [DbContext(typeof(TechnoSkillingDbContext))]
-    partial class TechnoSkillingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250204082857_Add_BlogPost_UserInfoRelationCreate")]
+    partial class Add_BlogPost_UserInfoRelationCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

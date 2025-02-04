@@ -13,5 +13,10 @@ namespace TechnoSkillingAPI.Data
         {
             model.Entity<UserInfo>().HasIndex(p => p.Email).IsUnique(true);
         }
+        public static void Setup_BlogCategory(this ModelBuilder model)
+        {
+            model.Entity<BlogCategory>().HasIndex(p => p.BlogCatgName).IsUnique(true);
+        }
+
     }
 }
