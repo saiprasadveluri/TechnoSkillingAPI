@@ -29,6 +29,19 @@ namespace TechnoSkillingAPI.Controllers
             var Res = blogPostRepo.Get(id);
             return Ok(new { Data = Res, Status = 1 });
         }
+        [HttpPost]
+        public async Task<ActionResult> AddBlogPost(BlogPostRequestDTO dto)
+        {
+            bool Res = blogPostRepo.Add(dto);
+            if (Res)
+            {
+                return Ok(new { Data = Res, Status = 1 });
+            }
+            else
+            {
+                return BadRequest(new { Data = Res, Status = 0 });
+            }
+        }
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
