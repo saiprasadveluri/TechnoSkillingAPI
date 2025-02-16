@@ -1,6 +1,10 @@
 
 using Microsoft.EntityFrameworkCore;
 using TechnoSkillingAPI.Data;
+using TechnoSkillingAPI.Infra;
+using TechnoSkillingAPI.Repo;
+using TechnoSkillingAPI.RequestDTO;
+using TechnoSkillingAPI.ResponseDTO;
 
 namespace TechnoSkillingAPI
 {
@@ -18,6 +22,7 @@ namespace TechnoSkillingAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
             builder.Services.AddScoped<TechnoSkillingDbContext>();
+            builder.Services.Inject<BlogCategoryRequestDTO, BlogCategoryResponseDTO>(typeof(TechnoSkillingAPI.Repo.BlogCategoryRepo));
             builder.Services.AddCors(act =>
             {
                 act.AddPolicy("AllowAll", policy =>

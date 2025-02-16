@@ -13,10 +13,10 @@ namespace TechnoSkillingAPI.Controllers
     [EnableCors("AllowAll")]
     public class BlogCategoryController : ControllerBase
     {
-        BlogCategoryRepo blogCategoryRepo;
-        public BlogCategoryController(TechnoSkillingDbContext ctx)
+        IRepoBase<BlogCategoryRequestDTO,BlogCategoryResponseDTO> blogCategoryRepo;
+        public BlogCategoryController(IRepoBase<BlogCategoryRequestDTO, BlogCategoryResponseDTO> repo)
         {
-            blogCategoryRepo = new BlogCategoryRepo(ctx);
+            blogCategoryRepo = repo;
         }
         [HttpGet]
         public async Task<ActionResult> GetAll()
