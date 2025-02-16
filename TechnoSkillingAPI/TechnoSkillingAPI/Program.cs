@@ -22,7 +22,10 @@ namespace TechnoSkillingAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
             builder.Services.AddScoped<TechnoSkillingDbContext>();
+           
             builder.Services.Inject<BlogCategoryRequestDTO, BlogCategoryResponseDTO>(typeof(TechnoSkillingAPI.Repo.BlogCategoryRepo));
+            builder.Services.Inject<BlogPostRequestDTO, BlogPostResponseDTO>(typeof(TechnoSkillingAPI.Repo.BlogPostRepo));
+
             builder.Services.AddCors(act =>
             {
                 act.AddPolicy("AllowAll", policy =>
