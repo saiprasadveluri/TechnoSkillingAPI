@@ -23,8 +23,9 @@ namespace TechnoSkillingAPI
             builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
             builder.Services.AddScoped<TechnoSkillingDbContext>();
            
-            builder.Services.Inject<BlogCategoryRequestDTO, BlogCategoryResponseDTO>(typeof(TechnoSkillingAPI.Repo.BlogCategoryRepo));
-            builder.Services.Inject<BlogPostRequestDTO, BlogPostResponseDTO>(typeof(TechnoSkillingAPI.Repo.BlogPostRepo));
+            builder.Services.AddRepo<BlogCategoryRequestDTO, BlogCategoryResponseDTO>(typeof(TechnoSkillingAPI.Repo.BlogCategoryRepo));
+            builder.Services.AddRepo<BlogPostRequestDTO, BlogPostResponseDTO>(typeof(TechnoSkillingAPI.Repo.BlogPostRepo));
+            builder.Services.AddRepo<GallaryRequestDTO, GallaryResponseDTO>(typeof(TechnoSkillingAPI.Repo.GallaryRepo));
 
             builder.Services.AddCors(act =>
             {

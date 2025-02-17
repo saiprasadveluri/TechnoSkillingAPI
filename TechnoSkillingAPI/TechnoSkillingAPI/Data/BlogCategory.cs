@@ -12,7 +12,7 @@ namespace TechnoSkillingAPI.Data
         [Required]
         [StringLength(50)]
         public string BlogCatgName { get; set; }
-        public string BlogCatgIconPic { get; set; }
+        public string? BlogCatgIconPic { get; set; }
         [StringLength(300)]
         public string BlogCatgDescription { get; set; }
         [Required]

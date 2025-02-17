@@ -11,6 +11,8 @@ namespace TechnoSkillingAPI.Data
         
         public DbSet<BlogCategory> BlogCategories { get; set; }
         public DbSet<BlogPost> BlogPosts { get; set; }
+
+        public DbSet<Gallery> Galleries { get; set; }
         public TechnoSkillingDbContext(IConfiguration cfg)
         {
             config = cfg;

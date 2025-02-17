@@ -15,7 +15,7 @@
                 do
                 {
                     byte[] arrBytes = new byte[ChunkSize];
-                    BytesRead = fs.Read(arrBytes, Offset, ChunkSize);
+                    BytesRead = fs.Read(arrBytes, 0, ChunkSize);
                     if (BytesRead != 0)
                     {
                         ms.Write(arrBytes);

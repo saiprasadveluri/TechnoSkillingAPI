@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TechnoSkillingAPI.Repo;
 using TechnoSkillingAPI.RequestDTO;
@@ -8,6 +9,7 @@ namespace TechnoSkillingAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowAll")]
     public class BlogPostController : ControllerBase
     {
         IRepoBase<BlogPostRequestDTO, BlogPostResponseDTO> blogPostRepo;

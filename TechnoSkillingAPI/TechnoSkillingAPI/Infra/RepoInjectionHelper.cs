@@ -7,7 +7,7 @@ namespace TechnoSkillingAPI.Infra
 {
     public static class RepoInjectionHelper
     {
-        public static void Inject<T,K>(this IServiceCollection service,Type repoType)
+        public static void AddRepo<T,K>(this IServiceCollection service,Type repoType)
         {
             
             service.AddScoped<IRepoBase<T,K>>((srvProvider) =>
