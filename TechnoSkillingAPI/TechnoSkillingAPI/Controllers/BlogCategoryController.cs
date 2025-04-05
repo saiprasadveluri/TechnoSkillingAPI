@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TechnoSkillingAPI.Data;
@@ -33,6 +34,7 @@ namespace TechnoSkillingAPI.Controllers
             else
                 return BadRequest(new{ Data = "Error", Status = 0 });
         }
+        [Authorize("OnlyAdmin")]
         [HttpPost]
         public async Task<ActionResult> AddBlogCategory(BlogCategoryRequestDTO dto)
         {
@@ -46,6 +48,7 @@ namespace TechnoSkillingAPI.Controllers
                 return BadRequest(new { Data = Res, Status = 0 });
             }
         }
+        [Authorize("OnlyAdmin")]
         [HttpPut]
         public async Task<ActionResult> EditBlogCategory(BlogCategoryRequestDTO dto)
         {
@@ -60,6 +63,7 @@ namespace TechnoSkillingAPI.Controllers
             }
         }
 
+        [Authorize("OnlyAdmin")]
         [HttpDelete("{Id}")]
         public async Task<ActionResult> DeleteBlogCategory(Guid Id)
         {

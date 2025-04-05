@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -39,11 +40,10 @@ namespace TechnoSkillingAPI.Repo
                 new Claim("UserId",UserId)
             };
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
+            var securityKey = ConfigValueReader.GetKey(config);
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(config["Jwt:Issuer"],
-              config["Jwt:Issuer"],
+            var issuer = ConfigValueReader.GetIssuer(config);
+            var token = new JwtSecurityToken(issuer, issuer,             
               claims,
               expires: DateTime.Now.AddMinutes(120),
               signingCredentials: credentials);

@@ -1,10 +1,11 @@
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using TechnoSkillingAPI.Data;
 using TechnoSkillingAPI.Infra;
 using TechnoSkillingAPI.Repo;
 using TechnoSkillingAPI.RequestDTO;
 using TechnoSkillingAPI.ResponseDTO;
+using TechnoSkillingAPI.Utils;
 
 namespace TechnoSkillingAPI
 {
@@ -16,11 +17,33 @@ namespace TechnoSkillingAPI
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(x =>
+            {
+                x.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
+            var config = builder.Configuration;
+            builder.Host.AddSerilog();
+            builder.Services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(cfg =>
+            {
+                cfg.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {
+                    IssuerSigningKey= ConfigValueReader.GetKey(config),
+                    ValidateIssuer=true,
+                    ValidateAudience=true,
+                    ValidateLifetime = false,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = ConfigValueReader.GetIssuer(config),
+                    ValidAudience = ConfigValueReader.GetIssuer(config)
+                };
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+            builder.Services.AddSingleton<IConfiguration>(config);
             builder.Services.AddScoped<TechnoSkillingDbContext>();
            
             builder.Services.AddRepo<BlogCategoryRequestDTO, BlogCategoryResponseDTO>(typeof(TechnoSkillingAPI.Repo.BlogCategoryRepo));
@@ -43,7 +66,7 @@ namespace TechnoSkillingAPI
                 });
             });
             var app = builder.Build();
-
+            app.UseMiddleware<ExceptionMiddleware>();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
