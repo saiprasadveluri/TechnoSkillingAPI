@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TechnoSkillingAPI.Data
 {
+    //Documentation
     public class BlogCategory
     {
         [Key]
